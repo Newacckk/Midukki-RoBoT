@@ -75,7 +75,7 @@ class Configs(object):
     LOADING_SYMBOL = bool(environ.get("LOADING_MODE", True))
     LOADING_A = environ.get("LOADING_SYMBOL_A", "⚪️")
     LOADING_B = environ.get("LOADING_SYMBOL_B", "⚫️")
-    STOP_BOT = bool(environ.get("DEFAULT", False))
+    STOP_BOT = bool(environ.get("DEFAULT", True))
     PORT_CODE = environ.get("PORT", "8080")
     broadcast_ids = {} # don't change this..!!  
 
