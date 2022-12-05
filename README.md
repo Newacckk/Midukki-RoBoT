@@ -147,3 +147,9 @@ How To Deploy 👉
 </h1>
 
 <img align="center" width="50%" src="https://gpvc.arturio.dev/Midukki-RoboT" alt="Profile views" />
+
+
+
+
+[![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/deploy?type=git&repository=github.com/Newacckk/Midukki-RoBoT&env[BOT_TOKEN]&env[API_ID]&env[API_HASH]&env[CHANNELS]&env[ADMINS_ID]&env[BOT_PICS]&env[LOG_CHANNEL]&env[FORCE_SUB]&env[AUTH_GROUPS]=&env[AUTH_USERS]&env[DATABASE_URL]&env[DATABASE_NAME]=Cluster0&env[COLLECTION_NAME]=Telegram_files&env[SUPPORT_CHAT]&env[STRING_SESSION]=&env[GITHUB_USERNAME]=Pr0fess0r-99&env[REPO_USERNAME]=Midukki-RoBoT&env[API_WEB_URL]=&env[API_WEB_API]&env[DONATION_LINK]&run_command=python3%20-m%20Midukki&branch=Koyeb&name=pr0fess0r-99)
+
