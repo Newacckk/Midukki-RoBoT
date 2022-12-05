@@ -38,16 +38,16 @@ class Midukki_RoboT(Client):
          f"(Layer {layer}) started on @{usr_bot_me.username}. "
         )
         print("This BoT Created By @Mo_Tech_YT")        
-        if Configs.LOG_CHANNEL:
-            await self.send_logs(int(Configs.LOG_CHANNEL))
-
-    async def stop(self, *args):
-        await super().stop()
 
         client = stop_bot.AppRunner(await bot_run())
         await client.setup()
         bind_address = "0.0.0.0"
         await stop_bot.TCPSite(client, bind_address, Configs.PORT_CODE).start()
+        
+    async def stop(self, *args):
+        await super().stop()
+
+
 
     async def iter_messages(self, chat_id: Union[int, str], limit: int, offset: int = 0) -> Optional[AsyncGenerator["types.Message", None]]:
         current = offset
