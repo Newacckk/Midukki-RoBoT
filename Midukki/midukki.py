@@ -20,7 +20,7 @@ class Midukki_RoboT(Client):
             bot_token=Accounts.BOT_TOKEN,
             plugins={"root": Accounts.BOT_PLUGINS},
             workers=400,
-            sleep_threshold=5,
+            sleep_threshold=60,
         )
 
     async def start(self):
