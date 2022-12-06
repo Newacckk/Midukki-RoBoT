@@ -3,7 +3,7 @@ from asyncio import sleep
 from pyrogram import filters, enums
 from Midukki.midukki import Midukki_RoboT
 from pyrogram.errors.exceptions.bad_request_400 import ChannelInvalid, ChatAdminRequired, UsernameInvalid, UsernameNotModified
-from pyrogram.errors import UserIsBlocked, MessageNotModified, PeerIdInvalid
+from pyrogram.errors import UserIsBlocked, MessageNotModified, PeerIdInvalid, FloodWait
 from Midukki.database import db, Media, save_file, get_file_details, get_search_results
 from Midukki.functions.commands import button, markup, message
 from Midukki.functions.handlers import AutoFilter, Admins
@@ -667,17 +667,9 @@ async def get_result_file(client, query):
     )
  
     try:
-        if Configs.AUTH_CHANNEL != 1:
-            if Configs.AUTH_CHANNEL and not await client.is_subscribed(client, query):
-                await query.answer(url=f"https://t.me/{Bots.BOT_USERNAME}?start=Midukki_-_{file_id}")
-                return
-            else:     
-                await client.send_cached_media(
-                    chat_id=query.from_user.id,
-                    file_id=file_id,
-                    caption=f_caption                    
-                )
-                await query.answer('Check PM, I have sent files in pm', show_alert=True)
+        if Configs.AUTH_CHANNEL and not await client.is_subscribed(client, query):
+            await query.answer(url=f"https://t.me/{Bots.BOT_USERNAME}?start=Midukki_-_{file_id}")
+            return
         else:     
             await client.send_cached_media(
                 chat_id=query.from_user.id,
@@ -915,6 +907,8 @@ async def next_page_(message):
             )
         except MessageNotModified:
             pass
+        except FloodWait as x:
+            await asyncio.sleep(x.value)
         return
     else:
         buttons = data['buttons'][int(index)+1].copy()
@@ -962,6 +956,8 @@ async def next_page_(message):
             )
         except MessageNotModified:
             pass
+        except FloodWait as x:
+            await asyncio.sleep(x.value)
         return
 
 async def back_page_(message):
@@ -1015,6 +1011,8 @@ async def back_page_(message):
             )
         except MessageNotModified:
             pass
+        except FloodWait as x:
+            print(x.value)
         return
     else:
         buttons = data['buttons'][int(index)-1].copy()
@@ -1064,6 +1062,9 @@ async def back_page_(message):
             )
         except MessageNotModified:
             pass
+        except FloodWait as x:
+            await asyncio.sleep(x.value)
+            pass
         return
 
 async def get_shortlink(link):
@@ -1088,7 +1089,7 @@ async def get_shortlink(link):
 
 async def check_correct_spelling(message, settings):
     try:
-        await message.reply(settings["spell_caption"].format(mention=message.from_user.mention, title=message.chat.title, query=message.text))
+        await message.reply(settings["spell_caption"].format(mention=user_mention(message), title=message.chat.title, query=message.text))
     except Exception as e:
-        await message.reply(Customize.SPELLCHECK_CAPTION.format(mention=message.from_user.mention, title=message.chat.title, query=message.text))
+        await message.reply(Customize.SPELLCHECK_CAPTION.format(mention=user_mention(message), title=message.chat.title, query=message.text))
         await message.reply(e)
