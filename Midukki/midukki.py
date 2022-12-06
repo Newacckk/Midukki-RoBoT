@@ -19,7 +19,7 @@ class Midukki_RoboT(Client):
             api_hash=Accounts.API_HASH,
             bot_token=Accounts.BOT_TOKEN,
             plugins={"root": Accounts.BOT_PLUGINS},
-            workers=min(32, cpu_count() + 4),
+            workers=400,
             sleep_threshold=5,
         )
 
